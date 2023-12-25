@@ -1,0 +1,30 @@
+name: Build
+on:
+  workflow_dispatch: 
+  
+  push:
+    branches:
+      - master
+      - main
+        
+env: 
+  DOTNET_VERSION: "8.0.x"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        
+      - name: Set up .Net Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          
+      - name: Restore dependencies
+        run: dotnet restore ./Above.Fix.sln
+        
+      - name: Build
+        run: dotnet build ./Above.Fix.sln --configuration Release --no-restore
+        
+      - name: Test
+        run: dotnet test ./Above.Fix.sln --configuration Release --no-build --no-restore --verbosity normal
