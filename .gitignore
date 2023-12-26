@@ -265,3 +265,5 @@ src/Above.Fix.Blazor.Server.Tiered/Logs/*
 **/wwwroot/libs/*
 
 appsettings.secret.json
+src/Above.Fix.DbMigrator/appsettings.secrets.json
+src/Above.Fix.HttpApi.Host/appsettings.secrets.json
